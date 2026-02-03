@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Sitashma 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ff4f81,#ff9dbb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Segoe UI', cursive;
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+.card{
+    background:rgba(255,255,255,0.18);
+    padding:26px;
+    border-radius:22px;
+    max-width:380px;
+    box-shadow:0 0 35px rgba(0,0,0,0.25);
+    animation:pop 0.8s ease;
+}
+@keyframes pop{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
+h1{font-size:2em}
+p{font-size:1.1em;margin:18px 0}
+button{padding:12px 24px;border:none;border-radius:25px;font-size:1em;cursor:pointer;margin:8px;}
+.next{background:#ff2f6d;color:white}
+.no{background:white;color:#ff2f6d;position:relative}
+.heart{position:absolute;font-size:20px;animation:float 6s linear infinite}
+@keyframes float{0%{transform:translateY(100vh);opacity:0}50%{opacity:1}100%{transform:translateY(-10vh);opacity:0}}
+.ring{font-size:70px;animation:ringPop 1.5s ease infinite}
+@keyframes ringPop{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+/* Confetti shapes */
+.confetti{position:absolute;width:10px;height:10px;background:yellow;opacity:0.8;animation:fall 3s linear infinite}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0deg)}100%{transform:translateY(100vh) rotate(360deg)}}
+</style>
+</head>
+<body>
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5e7c0d3bfb.mp3" type="audio/mpeg">
+</audio>
+<div class="card" id="card"></div>
+<script>
+let page=0;
+const music=document.getElementById("music");
 
+const pages=[
+`<h1>Hey Sitashma 💖</h1>
+<p>My Bebuuuuuu 🥰<br>Maile timro lagi ekdam special kura banayeko chu 😌</p>
+<button class="next" onclick="startGame()">Start 💘</button>`,
+
+`<h1>Question 1 😈</h1>
+<p>If I pull you closer suddenly…<br>Timro reaction ke huncha? 😏</p>
+<button class="next" onclick="nextPage()">Smile & melt 🥰</button>
+<button class="next" onclick="nextPage()">Fake gussa but enjoy 😜</button>`,
+
+`<h1>Question 2 🔥</h1>
+<p>Late night + blanket + me + you…<br>Dangerously perfect haina? 😌</p>
+<button class="next" onclick="nextPage()">Perfect combo 😍</button>
+<button class="next" onclick="nextPage()">Best feeling ever 💞</button>`,
+
+`<h1>Question 3 💋</h1>
+<p>If I whisper in your ears…<br>Laaj lagcha ki maja aaucha? 😏</p>
+<button class="next" onclick="nextPage()">Laaj lagcha 🙈</button>
+<button class="next" onclick="nextPage()">Both 😈</button>`,
+
+`<h1>Nepali Mode 🇳🇵</h1>
+<p>Timro muskan mero duniya ho ❤️<br>Malai timro saath chaiyeko cha…</p>
+<button class="next" onclick="nextPage()">Always saath 🤍</button>`,
+
+`<h1>Question 4 😘</h1>
+<p>Choose one only bebuuuu 😏</p>
+<button class="next" onclick="nextPage()">Soft kisses 💋</button>
+<button class="next" onclick="nextPage()">Long tight hugs 🤗</button>`,
+
+`<h1>Nepali Question 🇳🇵</h1>
+<p>Ma sanga basna mann cha?<br>Ajha dherai samaya… 😌</p>
+<button class="next" onclick="nextPage()">Yes dherai 🥺</button>
+<button class="next" onclick="nextPage()">Forever 😍</button>`,
+
+`<h1>Almost There 💍</h1>
+<p>Last question, promise 💖</p>
+<button class="next" onclick="nextPage()">I’m ready 😳</button>`,
+
+`<h1>Final Question 💘</h1>
+<p>Sitashma…<br>Will you be my Valentine? 🥰</p>
+<button class="next" onclick="accept()">YES BEBUUUUU ❤️</button>
+<button class="no" onmouseover="escapeBtn(this)">NO 🙈</button>`
+];
+
+function startGame(){music.volume=0.6;music.play();nextPage();}
+function nextPage(){page++;render();}
+function accept(){
+    document.getElementById("card").innerHTML=`
+        <div class="ring">💍</div>
+        <h1>SHE SAID YES 😍</h1>
+        <p>Timi mero Valentine ho ❤️<br>Mero Bebuuuuuu… always & forever 😘</p>`;
+    for(let i=0;i<60;i++){
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+    }
+}
+function escapeBtn(btn){btn.style.transform=`translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;}
+function render(){document.getElementById("card").innerHTML=pages[page];}
+function createHeart(){const h=document.createElement("div");h.className="heart";h.innerHTML="❤️";h.style.left=Math.random()*100+"vw";h.style.fontSize=Math.random()*20+15+"px";document.body.appendChild(h);setTimeout(()=>h.remove(),6000);}
+setInterval(createHeart,300);
+render();
+</script>
+</body>
+  </html>
